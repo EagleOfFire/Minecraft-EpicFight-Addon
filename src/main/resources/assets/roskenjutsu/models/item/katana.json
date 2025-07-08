@@ -1,0 +1,99 @@
+{
+  "loader": "forge:separate_transforms",
+  "base": {
+    "loader": "forge:obj",
+    "model": "roskenjutsu:models/item/obj/katana.obj",
+    "flip-v": true,
+    "display": {
+      "thirdperson_righthand": {
+        "translation": [
+          7.5,
+          -9.5,
+          9.5
+        ],
+        "rotation": [
+          90,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ]
+      },
+      "firstperson_righthand": {
+        "translation": [
+          24,
+          -20,
+          -5
+        ],
+        "rotation": [
+          85,
+          0,
+          0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      }
+    }
+  },
+  "perspectives": {
+    "ground": {
+      "loader": "forge:obj",
+      "model": "roskenjutsu:models/item/obj/katana.obj",
+      "display": {
+        "ground": {
+          "translation": [
+            -5,
+            1.5,
+            10
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "scale": [
+            0.6,
+            0.6,
+            0.6
+          ]
+        }
+      }
+    },
+    "gui": {
+      "parent": "item/generated",
+      "textures": {
+        "layer0": "roskenjutsu:item/katana_icon"
+      },
+      "gui_light": "front"
+    },
+    "fixed": {
+      "loader": "forge:obj",
+      "model": "roskenjutsu:models/item/obj/katana.obj",
+      "display": {
+        "ground": {
+          "translation": [
+            0,
+            1.5,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            90
+          ],
+          "scale": [
+            0.6,
+            0.6,
+            0.6
+          ]
+        }
+      }
+    }
+  }
+}

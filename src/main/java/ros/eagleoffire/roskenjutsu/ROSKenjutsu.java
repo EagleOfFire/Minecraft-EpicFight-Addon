@@ -27,6 +27,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
+import ros.eagleoffire.roskenjutsu.item.ModCreativeTabs;
+import ros.eagleoffire.roskenjutsu.item.ModItems;
 
 @Mod(ROSKenjutsu.MODID)
 public class ROSKenjutsu {
@@ -35,6 +37,9 @@ public class ROSKenjutsu {
 
     public ROSKenjutsu(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
+
+        ModCreativeTabs.register(modEventBus);
+        ModItems.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
 
@@ -48,14 +53,5 @@ public class ROSKenjutsu {
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-    }
-
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-            // Example: setup rendering, keybinds, etc.
-            LOGGER.info("Client setup for ROSKenjutsu");
-        }
     }
 }
