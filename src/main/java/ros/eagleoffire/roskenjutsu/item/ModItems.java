@@ -1,6 +1,7 @@
 package ros.eagleoffire.roskenjutsu.item;
 
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -15,6 +16,8 @@ public class ModItems {
 
     public static final RegistryObject<Item> KATANA = ITEMS.register("katana",
             () -> new ObjSwordItem(Tiers.NETHERITE, 3, -2.4F, new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> SAYA = ITEMS.register("saya",
+            () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
