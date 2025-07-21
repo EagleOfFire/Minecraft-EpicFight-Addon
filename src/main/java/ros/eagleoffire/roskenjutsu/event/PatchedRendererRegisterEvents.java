@@ -14,7 +14,6 @@ import yesman.epicfight.api.client.forgeevent.PatchedRenderersEvent;
 public class PatchedRendererRegisterEvents {
     @SubscribeEvent
     public static void registerRenderer(PatchedRenderersEvent.RegisterItemRenderer event) {
-        System.out.println("ROS PatchedRendererRegisterEvents");
         event.addItemRenderer(ResourceLocation.tryBuild(ROSKenjutsu.MODID, "katana"), RenderKatana::new);
     }
 }

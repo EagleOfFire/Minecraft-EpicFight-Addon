@@ -24,8 +24,6 @@ public class RenderKatana extends RenderItemBase {
     public RenderKatana(JsonElement jsonElement){
         super(jsonElement);
         this.sheathStack = new ItemStack(ModItems.SAYA.get());
-        System.out.println("ROS sheath init");
-        System.out.println(this.sheathStack);
     }
 
     @Override
@@ -40,8 +38,6 @@ public class RenderKatana extends RenderItemBase {
 
 		poseStack.pushPose();
 		MathUtils.mulStack(poseStack, modelMatrix);
-        System.out.println("ROS sheath");
-        System.out.println(this.sheathStack);
 		itemRenderer.renderStatic(this.sheathStack, ItemDisplayContext.THIRD_PERSON_RIGHT_HAND, packedLight, OverlayTexture.NO_OVERLAY, poseStack, buffer, null, 0);
         poseStack.popPose();
     }

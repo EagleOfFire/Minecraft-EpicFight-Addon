@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -26,14 +27,17 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.apache.commons.logging.Log;
 import org.slf4j.Logger;
+import ros.eagleoffire.roskenjutsu.gameasset.ROSColliderPreset;
 import ros.eagleoffire.roskenjutsu.item.ModCreativeTabs;
 import ros.eagleoffire.roskenjutsu.item.ModItems;
+import ros.eagleoffire.roskenjutsu.world.capabilities.item.ROSWeaponTypeReloadListener;
 
 @Mod(ROSKenjutsu.MODID)
 public class ROSKenjutsu {
     public static final String MODID = "roskenjutsu";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public ROSKenjutsu(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
@@ -48,6 +52,11 @@ public class ROSKenjutsu {
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
+    }
+
+    private void addReloadListenerEvent(final AddReloadListenerEvent event){
+        event.addListener(new ROSColliderPreset());
+        event.addListener(new ROSWeaponTypeReloadListener());
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
