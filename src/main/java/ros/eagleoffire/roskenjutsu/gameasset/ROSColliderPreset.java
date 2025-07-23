@@ -44,7 +44,7 @@ public class ROSColliderPreset implements PreparableReloadListener {
         return PRESETS.get(rl);
     }
 
-    public static final Collider KATANA = registerCollider(ResourceLocation.fromNamespaceAndPath(ROSKenjutsu.MODID, "uchigatana"), new MultiOBBCollider(5, 0.4D, 0.4D, 0.7D, 0D, 0D, -0.7D));
+    public static final Collider KATANA = registerCollider(ResourceLocation.fromNamespaceAndPath(ROSKenjutsu.MODID, "katana"), new MultiOBBCollider(5, 0.4D, 0.4D, 0.7D, 0D, 0D, -0.7D));
 
     public static Collider deserializeSimpleCollider(CompoundTag tag) throws IllegalArgumentException {
         int number = tag.getInt("number");

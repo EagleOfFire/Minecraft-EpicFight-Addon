@@ -3,7 +3,7 @@
 		{
 			"start_time": 0.15,
 			"end_time": 0.25,
-			"joint": "low_right_arm.item",
+			"joint": "Tool_R",
 			"item_skin_hand": "main_hand"
 		}
 	]
