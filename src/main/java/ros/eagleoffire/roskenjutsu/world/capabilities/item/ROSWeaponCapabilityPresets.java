@@ -69,8 +69,36 @@ public class ROSWeaponCapabilityPresets {
 		return builder;
 	};
 
+	public static final Function<Item, CapabilityItem.Builder> TETSUBO = (item) -> {
+		CapabilityItem.Builder builder = WeaponCapability.builder()
+				.category(WeaponCategories.GREATSWORD)
+				.styleProvider((entitypatch) -> Styles.TWO_HAND)
+				.passiveSkill(EpicFightSkills.BERSERKER)
+				.collider(ROSColliderPreset.TETSUBO)
+				.hitSound(EpicFightSounds.BLUNT_HIT.get())
+				.canBePlacedOffhand(false)
+				.newStyleCombo(Styles.TWO_HAND, ROSAnimations.TETSUBO_AUTO1, Animations.GREATSWORD_DASH, Animations.GREATSWORD_AIR_SLASH)
+				.newStyleCombo(Styles.MOUNT, Animations.SWORD_MOUNT_ATTACK)
+				.innateSkill(Styles.TWO_HAND, (itemstack) -> EpicFightSkills.BERSERKER)
+				.comboCancel((style) -> {
+					return false;
+				})
+				.livingMotionModifier(Styles.TWO_HAND, LivingMotions.IDLE, Animations.BIPED_HOLD_GREATSWORD)
+				.livingMotionModifier(Styles.TWO_HAND, LivingMotions.KNEEL, Animations.BIPED_HOLD_GREATSWORD)
+				.livingMotionModifier(Styles.TWO_HAND, LivingMotions.WALK, Animations.BIPED_WALK_GREATSWORD)
+				.livingMotionModifier(Styles.TWO_HAND, LivingMotions.CHASE, Animations.BIPED_WALK_GREATSWORD)
+				.livingMotionModifier(Styles.TWO_HAND, LivingMotions.RUN, Animations.BIPED_RUN_GREATSWORD)
+				.livingMotionModifier(Styles.TWO_HAND, LivingMotions.SNEAK, Animations.BIPED_WALK_GREATSWORD)
+				.livingMotionModifier(Styles.TWO_HAND, LivingMotions.SWIM, Animations.BIPED_HOLD_GREATSWORD)
+				.livingMotionModifier(Styles.TWO_HAND, LivingMotions.FLOAT, Animations.BIPED_HOLD_GREATSWORD)
+				.livingMotionModifier(Styles.TWO_HAND, LivingMotions.FALL, Animations.BIPED_HOLD_GREATSWORD)
+				.livingMotionModifier(Styles.TWO_HAND, LivingMotions.BLOCK, Animations.GREATSWORD_GUARD);
+		return builder;
+	};
+
 	@SubscribeEvent
 	public static void register(WeaponCapabilityPresetRegistryEvent event){
 		event.getTypeEntry().put(ResourceLocation.fromNamespaceAndPath(ROSKenjutsu.MODID, "katana"), KATANA);
+		event.getTypeEntry().put(ResourceLocation.fromNamespaceAndPath(ROSKenjutsu.MODID, "tetsubo"), TETSUBO);
 	}
 }

@@ -57,6 +57,7 @@ public class ROSWeaponTypeReloadListener extends SimpleJsonResourceReloadListene
     public static void registerDefaultWeaponTypes() {
         Map<ResourceLocation, Function<Item, CapabilityItem.Builder>> typeEntry = Maps.newHashMap();
         typeEntry.put(ResourceLocation.fromNamespaceAndPath(ROSKenjutsu.MODID, "katana"), ROSWeaponCapabilityPresets.KATANA);
+        typeEntry.put(ResourceLocation.fromNamespaceAndPath(ROSKenjutsu.MODID, "tetsubo"), ROSWeaponCapabilityPresets.TETSUBO);
 
         WeaponCapabilityPresetRegistryEvent weaponCapabilityPresetRegistryEvent = new WeaponCapabilityPresetRegistryEvent(typeEntry);
         ModLoader.get().postEvent(weaponCapabilityPresetRegistryEvent);
@@ -97,26 +98,9 @@ public class ROSWeaponTypeReloadListener extends SimpleJsonResourceReloadListene
         }
     }
 
-    public static Function<Item, CapabilityItem.Builder> getOrThrow(String typeName) {
-        ResourceLocation rl = ResourceLocation.parse(typeName);
-
-        if (!PRESETS.containsKey(rl)) {
-            throw new IllegalArgumentException("Can't find weapon type: " + rl);
-        }
-
-        return PRESETS.get(rl);
-    }
-
-    public static Function<Item, CapabilityItem.Builder> get(String typeName) {
-        return get(ResourceLocation.parse(typeName));
-    }
 
     public static Function<Item, CapabilityItem.Builder> get(ResourceLocation typeName) {
         return PRESETS.get(typeName);
-    }
-
-    public static void register(ResourceLocation rl, CapabilityItem.Builder builder) {
-        PRESETS.put(rl, (item) -> builder);
     }
 
     public static WeaponCapability.Builder deserializeWeaponCapabilityBuilder(ResourceLocation rl, CompoundTag tag) {
@@ -262,45 +246,8 @@ public class ROSWeaponTypeReloadListener extends SimpleJsonResourceReloadListene
         return builder;
     }
 
-    public static int getTagCount() {
-        return CAPABILITY_COMPOUNDS.size();
-    }
-
-    public static Stream<CompoundTag> getWeaponTypeDataStream() {
-        Stream<CompoundTag> tagStream = CAPABILITY_COMPOUNDS.entrySet().stream().map((entry) -> {
-            entry.getValue().putString("registry_name", entry.getKey().toString());
-            return entry.getValue();
-        });
-        return tagStream;
-    }
-
-    public static Set<Map.Entry<ResourceLocation, Function<Item, CapabilityItem.Builder>>> entries() {
-        return PRESETS.entrySet();
-    }
-
     public static void clear() {
         PRESETS.clear();
         ROSWeaponTypeReloadListener.registerDefaultWeaponTypes();
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public static void processServerPacket(SPDatapackSync packet) {
-        if (packet.getType() == SPDatapackSync.Type.WEAPON_TYPE) {
-            PRESETS.clear();
-            registerDefaultWeaponTypes();
-
-
-            for (CompoundTag tag : packet.getTags()) {
-                ResourceLocation rl = ResourceLocation.parse(tag.getString("registry_name"));
-
-                try {
-                    PRESETS.put(rl, (itemstack) -> deserializeWeaponCapabilityBuilder(rl, tag));
-                } catch (Exception e) {
-                    throw new RuntimeException("Weapon type " + rl + " encountered an error", e);
-                }
-            }
-
-            ItemCapabilityReloadListener.weaponTypeProcessedCheck();
-        }
     }
 }
