@@ -19,6 +19,7 @@ public class ModCreativeTabs {
                     .title(Component.translatable("creativetab.ros_kenjutsu_tab"))
                     .displayItems((pParameters, pOutput) -> {
                         pOutput.accept(ModItems.KATANA.get());
+                        pOutput.accept(ModItems.TETSUBO.get());
                     }).build());
 
     public static void register(IEventBus eventBus) {

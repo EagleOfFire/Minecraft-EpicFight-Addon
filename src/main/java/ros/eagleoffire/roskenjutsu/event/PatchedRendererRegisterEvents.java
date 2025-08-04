@@ -7,6 +7,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import ros.eagleoffire.roskenjutsu.ROSKenjutsu;
 import ros.eagleoffire.roskenjutsu.renderer.RenderKatana;
+import ros.eagleoffire.roskenjutsu.renderer.RenderTetsubo;
 import yesman.epicfight.api.client.forgeevent.PatchedRenderersEvent;
 
 @OnlyIn(Dist.CLIENT)
@@ -15,5 +16,6 @@ public class PatchedRendererRegisterEvents {
     @SubscribeEvent
     public static void registerRenderer(PatchedRenderersEvent.RegisterItemRenderer event) {
         event.addItemRenderer(ResourceLocation.tryBuild(ROSKenjutsu.MODID, "katana"), RenderKatana::new);
+        event.addItemRenderer(ResourceLocation.tryBuild(ROSKenjutsu.MODID, "tetsubo"), RenderTetsubo::new);
     }
 }
